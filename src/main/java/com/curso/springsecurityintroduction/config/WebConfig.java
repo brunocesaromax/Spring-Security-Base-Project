@@ -25,6 +25,10 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                     .loginPage("/login")
                     .defaultSuccessUrl("/home", true)
+                    .permitAll()
+                .and()
+                .logout()
+                    .logoutSuccessUrl("/login?logout")
                     .permitAll();
     }
 

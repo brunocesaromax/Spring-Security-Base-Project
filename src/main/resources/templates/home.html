@@ -12,6 +12,9 @@
     <li sec:authorize="hasRole('LIST_COLORS')"><a href="/colors">Lista de cores</a></li>
 </ul>
 
+<form th:action="@{/logout}" th:method="POST" autocomplete="off">
+    <input name="submit" type="submit" value="logout"/>
+</form>
 
 </body>
 </html>
