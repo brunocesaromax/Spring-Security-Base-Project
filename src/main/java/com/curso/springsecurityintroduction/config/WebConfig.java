@@ -1,6 +1,7 @@
 package com.curso.springsecurityintroduction.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -14,6 +15,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                    .antMatchers("/users").hasAnyRole("LIST_USERS")
                     .antMatchers("/resources/**").permitAll()
                     .antMatchers("/login").permitAll()
                     .anyRequest().authenticated()
@@ -22,5 +24,14 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .defaultSuccessUrl("/home", true)
                     .permitAll();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .inMemoryAuthentication()
+                .withUser("bruno").password("{noop}123").roles("LIST_USERS")
+            .and()
+                .withUser("davi").password("{noop}123").roles();
     }
 }

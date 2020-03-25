@@ -8,11 +8,16 @@ public class SpringSecurityIntroductionController {
 
     @GetMapping(path = "/home")
     public String home(){
-        return "beer";
+        return "home";
     }
 
     @GetMapping(path = {"/","/login"})
     public String login(){
         return "login";
+    }
+
+    @GetMapping(path = "/users")
+    public String users(){
+        return "listUsers";
     }
 }
