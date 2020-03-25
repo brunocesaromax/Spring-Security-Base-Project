@@ -16,6 +16,8 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/users").hasAnyRole("LIST_USERS")
+                    .antMatchers("/products").hasAnyRole("LIST_PRODUCTS")
+                    .antMatchers("/colors").hasAnyRole("LIST_COLORS")
                     .antMatchers("/resources/**").permitAll()
                     .antMatchers("/login").permitAll()
                     .anyRequest().authenticated()
@@ -30,8 +32,8 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
             .inMemoryAuthentication()
-                .withUser("bruno").password("{noop}123").roles("LIST_USERS")
+                .withUser("bruno").password("{noop}123").roles("LIST_USERS", "LIST_PRODUCTS")
             .and()
-                .withUser("davi").password("{noop}123").roles();
+                .withUser("davi").password("{noop}123").roles("LIST_COLORS");
     }
 }

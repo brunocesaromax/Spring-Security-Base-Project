@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
 <h1>Home</h1>
-<a href="/users">Lista de usuários</a>
+<ul>
+    <li sec:authorize="hasRole('LIST_USERS')"><a href="/users">Lista de usuários</a></li>
+    <li sec:authorize="hasRole('LIST_PRODUCTS')"><a href="/products">Lista de produtos</a></li>
+    <li sec:authorize="hasRole('LIST_COLORS')"><a href="/colors">Lista de cores</a></li>
+</ul>
+
+
 </body>
 </html>

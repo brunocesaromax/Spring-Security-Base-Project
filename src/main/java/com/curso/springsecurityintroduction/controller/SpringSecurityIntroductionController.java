@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SpringSecurityIntroductionController {
 
     @GetMapping(path = "/home")
-    public String home(){
+    public String home(/*@AuthenticationPrincipal UserDetails userPrincipal*/){
         return "home";
     }
 
@@ -19,5 +19,15 @@ public class SpringSecurityIntroductionController {
     @GetMapping(path = "/users")
     public String users(){
         return "listUsers";
+    }
+
+    @GetMapping(path = "/colors")
+    public String colors(){
+        return "listColors";
+    }
+
+    @GetMapping(path = "/products")
+    public String products(){
+        return "listProducts";
     }
 }
