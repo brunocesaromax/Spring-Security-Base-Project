@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 
 import static com.curso.springsecurityintroduction.utils.JdbcUtils.*;
 
-@Configuration
+//@Configuration
 public class JdbcSecurityConfig {
 
     @Autowired
