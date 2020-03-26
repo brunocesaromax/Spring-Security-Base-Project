@@ -74,13 +74,14 @@ public class UserSessionDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User " + username + " not found!");
         }
 
+        String name = rs.getString("name");
         String password = rs.getString("password");
         boolean active = rs.getBoolean("active");
 
         rs.close();
         ps.close();
 
-        return new UserSession(username, password, active);
+        return new UserSession(name, username, password, active);
     }
 
     public Collection<GrantedAuthority> findPermissions(Connection connection, String username, String sql) throws SQLException {

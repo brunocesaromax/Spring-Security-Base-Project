@@ -1,7 +1,7 @@
 package com.curso.springsecurityintroduction.utils;
 
 public class JdbcUtils {
-    public static final String USER_BY_USERNAME = "SELECT username, password, active FROM user"
+    public static final String USER_BY_USERNAME = "SELECT name, username, password, active FROM user"
             + " WHERE username = ?";
 
     public static final String PERMISSIONS_BY_USER = "SELECT u.username, p.name as name_permission FROM user_permission up"

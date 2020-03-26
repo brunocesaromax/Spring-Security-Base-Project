@@ -18,7 +18,8 @@ public class UserSession implements UserDetails {
     private boolean active;
     private Collection<GrantedAuthority> permissions = new ArrayList<>();
 
-    public UserSession(String username, String password, boolean active) {
+    public UserSession(String name, String username, String password, boolean active) {
+        this.name = name;
         this.username = username;
         this.password = password;
         this.active = active;
