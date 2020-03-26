@@ -1,7 +1,6 @@
 package com.curso.springsecurityintroduction.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,11 +12,11 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/users").hasAnyRole("LIST_USERS")
                     .antMatchers("/products").hasAnyRole("LIST_PRODUCTS")
                     .antMatchers("/colors").hasAnyRole("LIST_COLORS")
+                    .antMatchers("/h2/**").permitAll()
                     .antMatchers("/resources/**").permitAll()
                     .antMatchers("/login").permitAll()
                     .anyRequest().authenticated()
@@ -30,14 +29,11 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutSuccessUrl("/login?logout")
                     .permitAll();
-    }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-                .withUser("bruno").password("{noop}123").roles("LIST_USERS", "LIST_PRODUCTS")
-            .and()
-                .withUser("davi").password("{noop}123").roles("LIST_COLORS");
+        http.csrf()
+                .ignoringAntMatchers("/h2/**");
+        http.headers()
+                .frameOptions()
+                .sameOrigin(); //Necessário para acessar o H2 no navegador
     }
 }
