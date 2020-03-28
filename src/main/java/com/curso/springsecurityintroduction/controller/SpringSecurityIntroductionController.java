@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class SpringSecurityIntroductionController {
 
-    @GetMapping(path = "/home")
-    public String home(/*@AuthenticationPrincipal UserDetails userPrincipal*/){
+    @GetMapping(path = {"/", "/home"})
+    public String home(){
         return "home";
     }
 
-    @GetMapping(path = {"/","/login"})
+    @GetMapping(path = {"/login"})
     public String login(){
         return "login";
     }

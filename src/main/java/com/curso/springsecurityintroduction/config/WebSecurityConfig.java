@@ -1,5 +1,6 @@
 package com.curso.springsecurityintroduction.config;
 
+import com.curso.springsecurityintroduction.security.UserSessionDetailsService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -7,7 +8,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-public class WebConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final UserSessionDetailsService userSessionDetailsService;
+
+    public WebSecurityConfig(UserSessionDetailsService userSessionDetailsService) {
+        this.userSessionDetailsService = userSessionDetailsService;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -28,7 +35,11 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                     .logoutSuccessUrl("/login?logout")
-                    .permitAll();
+                    .permitAll()
+                .and()
+                .rememberMe()
+                /*Usuário fecha o browser e abre de novo, necessário essa configuração para carregar permissões novamente*/
+                    .userDetailsService(userSessionDetailsService);
 
         http.csrf()
                 .ignoringAntMatchers("/h2/**");

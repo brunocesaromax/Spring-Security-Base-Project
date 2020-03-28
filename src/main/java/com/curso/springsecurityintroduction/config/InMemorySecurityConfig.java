@@ -1,7 +1,6 @@
 package com.curso.springsecurityintroduction.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 
 /*Necessário comentar linha abaixo para utilizar outras configurações de segurança*/
